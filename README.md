@@ -85,144 +85,79 @@ EDA is performed to visualize and understand the data distribution and relations
 
 
 
-Synthetic Data Generation
+## Synthetic Data Generation
 Synthetic data is generated to mimic the real dataset's statistical properties. The process includes:
 
-Using a generative model(GAN).
-Evaluating synthetic data quality using Kolmogorov-Smirnov (KS) tests across epochs.
-Saving synthetic data to synthetic_cirrhosis_data2.csv.
+- Using a generative model(GAN).
+- Evaluating synthetic data quality using Kolmogorov-Smirnov (KS) tests across epochs.
+- Saving synthetic data to synthetic_cirrhosis_data2.csv.
 
 
-Statistical Analysis
+## Statistical Analysis
 Statistical tests compare real and synthetic data:
 
-T-Tests: Compare means of continuous features.
-Cohen's d: Measure effect size for mean differences.
-KS-Tests: Compare feature distributions.
-Chi-Square Test: Compare stage distributions.
-Correlation Analysis: Compare correlation matrices between real and synthetic data.
+- **T-Tests:** Compare means of continuous features.
+- **Cohen's d:** Measure effect size for mean differences.
+- **KS-Tests:** Compare feature distributions.
+- **Chi-Square Test:** Compare stage distributions.
+- **Correlation Analysis:** Compare correlation matrices between real and synthetic data.
 
 
-Key Findings
+## Key Findings
 
-Bilirubin and Albumin means are significantly different (p < 0.05).
-SGOT and Prothrombin means are not significantly different (p > 0.05).
-Stage distributions are significantly different (p < 0.05).
-Matching Correlation Coefficient: Average absolute difference of 0.0600.
+- Bilirubin and Albumin means are significantly different (p < 0.05).
+- SGOT and Prothrombin means are not significantly different (p > 0.05).
+- Stage distributions are significantly different (p < 0.05).
+- Matching Correlation Coefficient: Average absolute difference of 0.0600.
 
-Machine Learning Models
+## Machine Learning Models
 The project evaluates multiple models for classifying cirrhosis stages (binary classification: stages 1-2 vs. 3-4):
 
-Models Evaluated:
-Gradient Boosting
-Random Forest
-Logistic Regression
-LightGBM
-Multi-Layer Perceptron (MLP)
-Voting Classifier (Logistic Regression + LightGBM)
+**Models Evaluated:**
+1. Gradient Boosting
+2. Random Forest
+3. Logistic Regression
+4. LightGBM
 
 
-Feature Selection: SelectKBest with f_classif to select top 4 features.
-Hyperparameter Tuning: GridSearchCV for optimizing model parameters.
-Cross-Validation: 5-fold stratified cross-validation.
-Metrics: Accuracy, Precision, Recall, Specificity, F1-Score, AUC-ROC.
+## Feature Selection: SelectKBest with f_classif to select top 4 features.
+- Hyperparameter Tuning: GridSearchCV for optimizing model parameters.
+- Cross-Validation: 5-fold stratified cross-validation.
+- Metrics: Accuracy, Precision, Recall, Specificity, F1-Score, AUC-ROC.
 
-Run the machine learning script:
-python scripts/ml_models.py
+## Model Performance
 
-Model Performance
-
-
-
-Model
-Accuracy
-Precision
-Recall
-Specificity
-F1-Score
-AUC-ROC
+| Model              | Accuracy | Precision | Recall  | Specificity | F1-Score | AUC-ROC |
+|--------------------|----------|-----------|---------|-------------|----------|---------|
+| Gradient Boosting  | 0.7112   | 0.7375    | 0.9365  | 0.1166      | 0.8246   | 0.6034  |
+| Random Forest      | 0.7257   | 0.7546    | 0.9232  | 0.2047      | 0.8299   | 0.6202  |
+| Logistic Regression| 0.7354   | 0.7669    | 0.9132  | 0.2656      | 0.8335   | 0.6567  |
+| LightGBM           | 0.7257   | 0.7268    | 0.9967  | 0.0087      | 0.8406   | 0.6502  |
+| MLP                | 0.7112   | 0.7348    | 0.9433  | 0.0984      | 0.8257   | 0.6164  |
+| Voting Classifier  | 0.7257   | 0.7257    | 1.0000  | 0.0000      | 0.8411   | 0.6587  |
 
 
 
-Gradient Boosting
-0.7112
-0.7375
-0.9365
-0.1166
-0.8246
-0.6034
 
+**ANOVA Results:** No significant difference in accuracy between models (p = 0.1938).
 
-Random Forest
-0.7257
-0.7546
-0.9232
-0.2047
-0.8299
-0.6202
+## Results
 
+1. EDA: Revealed significant skewness in Bilirubin and SGOT, addressed via log transformation. Stage distribution showed slight imbalance.
+2. Synthetic Data: Closely mimics real data but differs significantly in Bilirubin, Albumin, and Stage distributions.
+3. Machine Learning: Logistic Regression achieved the highest accuracy (0.7354), but synthetic data training yielded lower accuracy (0.5542) compared to real data (0.7108).
 
-Logistic Regression
-0.7354
-0.7669
-0.9132
-0.2656
-0.8335
-0.6567
-
-
-LightGBM
-0.7257
-0.7268
-0.9967
-0.0087
-0.8406
-0.6502
-
-
-MLP
-0.7112
-0.7348
-0.9433
-0.0984
-0.8257
-0.6164
-
-
-Voting Classifier
-0.7257
-0.7257
-1.0000
-0.0000
-0.8411
-0.6587
-
-
-
-ANOVA Results: No significant difference in accuracy between models (p = 0.1938).
-
-Results
-
-EDA: Revealed significant skewness in Bilirubin and SGOT, addressed via log transformation. Stage distribution showed slight imbalance.
-Synthetic Data: Closely mimics real data but differs significantly in Bilirubin, Albumin, and Stage distributions.
-Machine Learning: Logistic Regression achieved the highest accuracy (0.7354), but synthetic data training yielded lower accuracy (0.5542) compared to real data (0.7108).
-Utility: Synthetic data is useful but not a perfect substitute for real data in machine learning tasks.
-
-Usage
+## Usage
 To reproduce the analysis:
 
 Ensure all dependencies are installed.
 Place cirrhosis.csv in the data/ directory.
-Run scripts in the following order:python scripts/preprocessing.py
-python scripts/eda.py
-python scripts/synthetic_data_generation.py
-python scripts/statistical_analysis.py
-python scripts/ml_models.py
+Run the circhossis_v2104.ipynb script
 
 
-Outputs (figures, synthetic data, and results) will be saved in figures/ and data/ directories.
+Outputs (figures, synthetic data, and results) will be saved in the project's directory
 
-Contributing
+## Contributing
 Contributions are welcome! Please follow these steps:
 
 Fork the repository.
