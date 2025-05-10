@@ -51,63 +51,47 @@ Synthetic data is generated and saved as synthetic_cirrhosis_data2.csv for compa
 ## Project Structure
 cirrhosis-analysis/
 │
-├── data/
-│   ├── cirrhosis.csv
-│   ├── preprocessed_cirrhosis2.csv
-│   ├── synthetic_cirrhosis_data2.csv
-│
-├── scripts/
-│   ├── preprocessing.py
-│   ├── eda.py
-│   ├── synthetic_data_generation.py
-│   ├── statistical_analysis.py
-│   ├── ml_models.py
-│
-├── figures/
-│   ├── stage_distribution.png
-│   ├── histograms.png
-│   ├── box_plots.png
-│   ├── pair_plot.png
-│   ├── scatter_bilirubin_albumin.png
-│   ├── 3d_scatter.png
-│
+├── circhossis_v2104.ipynb
+├── generator_stage_1.pth
+├── generator_stage_2.pth
+├── generator_stage_3.pth
+├── generator_stage_4.pth
+├── circhossis.csv
+├── synthetic_circhossis_data2.csv
 ├── requirements.txt
 ├── README.md
 
-Preprocessing
+## Preprocessing
 The preprocessing steps include:
 
-Handling Missing Values: Numerical columns (Bilirubin, Albumin, SGOT, Prothrombin) are filled with their median values.
-Log Transformation: Applied to skewed features (Bilirubin, SGOT) to reduce skewness.
-Feature Selection: Selected relevant columns for analysis.
-Interaction Terms: Added features like Bilirubin_SGOT and Albumin_Prothrombin for machine learning.
-Scaling: Features are standardized using StandardScaler for machine learning models.
+- Handling Missing Values: Numerical columns (Bilirubin, Albumin, SGOT, Prothrombin) are filled with their median values.
+- Log Transformation: Applied to skewed features (Bilirubin, SGOT) to reduce skewness.
+- Feature Selection: Selected relevant columns for analysis.
+- Interaction Terms: Added features like Bilirubin_SGOT and Albumin_Prothrombin for machine learning.
+- Scaling: Features are standardized using StandardScaler for machine learning models.
 
-Run the preprocessing script:
-python scripts/preprocessing.py
+## Run the preprocessing script:
+circhossis_v2104.ipynb
 
-Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (EDA)
 EDA is performed to visualize and understand the data distribution and relationships:
 
-Histograms: Show distributions of features (original and log-transformed).
-Box Plots: Display feature distributions stratified by stage.
-Pair Plots: Visualize pairwise relationships between key features.
-Scatter Plots: Highlight relationships like Bilirubin vs. Albumin.
-3D Scatter Plot: Visualizes Bilirubin, Albumin, and SGOT by stage.
-Stage Distribution: Bar plot to check for class imbalance.
+**Histograms:** Show distributions of features.
+**Box Plots:** Display feature distributions stratified by stage.
+**Pair Plots:** Visualize pairwise relationships between key features.
+**Scatter Plots:** Highlight relationships like Bilirubin vs. Albumin.
+**3D Scatter Plot:** Visualizes Bilirubin, Albumin, and SGOT by stage.
+**Stage Distribution:** Bar plot to check for class imbalance.
 
-Run the EDA script:
-python scripts/eda.py
+
 
 Synthetic Data Generation
 Synthetic data is generated to mimic the real dataset's statistical properties. The process includes:
 
-Using a generative model (likely GAN-based, as implied by the code).
+Using a generative model(GAN).
 Evaluating synthetic data quality using Kolmogorov-Smirnov (KS) tests across epochs.
 Saving synthetic data to synthetic_cirrhosis_data2.csv.
 
-Run the synthetic data generation script:
-python scripts/synthetic_data_generation.py
 
 Statistical Analysis
 Statistical tests compare real and synthetic data:
@@ -118,8 +102,6 @@ KS-Tests: Compare feature distributions.
 Chi-Square Test: Compare stage distributions.
 Correlation Analysis: Compare correlation matrices between real and synthetic data.
 
-Run the statistical analysis script:
-python scripts/statistical_analysis.py
 
 Key Findings
 
